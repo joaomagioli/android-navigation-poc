@@ -60,7 +60,7 @@ class ListaProdutosFragment : Fragment() {
         adapter.onItemClickListener = { produtoSelecionado ->
             val data = Bundle()
             data.putLong(CHAVE_PRODUTO_ID, produtoSelecionado.id)
-            navController.navigate(R.id.detalhesProduto, data)
+            navController.navigate(R.id.action_listaProdutos_to_detalhesProduto, data)
         }
         lista_produtos_recyclerview.adapter = adapter
     }
