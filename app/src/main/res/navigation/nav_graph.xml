@@ -29,6 +29,9 @@
         tools:layout="@layout/pagamento">
         <action
             android:id="@+id/action_pagamento_to_listaProdutos"
-            app:destination="@id/listaProdutos" />
+            app:destination="@id/listaProdutos"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

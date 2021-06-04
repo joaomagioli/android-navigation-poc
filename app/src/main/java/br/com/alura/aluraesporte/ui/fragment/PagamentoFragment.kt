@@ -67,7 +67,7 @@ class PagamentoFragment : Fragment() {
                 FALHA_AO_CRIAR_PAGAMENTO,
                 Toast.LENGTH_LONG
             ).show()
-            navController.popBackStack(R.id.action_pagamento_to_listaProdutos, false)
+            navController.navigate(R.id.action_pagamento_to_listaProdutos)
         }
     }
 
