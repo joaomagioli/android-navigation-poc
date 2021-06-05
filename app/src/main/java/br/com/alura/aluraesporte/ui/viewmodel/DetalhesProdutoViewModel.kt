@@ -8,6 +8,6 @@ class DetalhesProdutoViewModel(
     repository: ProductRepository
 ) : ViewModel() {
 
-    val produtoEncontrado = repository.buscaPorId(produtoId)
+    val produtoEncontrado = repository.getById(produtoId)
 
 }

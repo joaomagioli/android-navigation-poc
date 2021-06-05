@@ -7,6 +7,6 @@ import br.com.alura.aluraesporte.repository.ProductRepository
 
 class ProdutosViewModel(private val repository: ProductRepository) : ViewModel() {
 
-    fun buscaTodos(): LiveData<List<Product>> = repository.buscaTodos()
+    fun buscaTodos(): LiveData<List<Product>> = repository.getAll()
 
 }

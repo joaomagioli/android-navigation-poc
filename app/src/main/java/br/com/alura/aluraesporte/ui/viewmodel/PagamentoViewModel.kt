@@ -9,7 +9,7 @@ class PagamentoViewModel(
     private val paymentRepository: PaymentRepository,
     private val produtodRepository: ProductRepository) : ViewModel() {
 
-    fun salva(payment: Payment) = paymentRepository.salva(payment)
-    fun buscaProdutoPorId(id: Long) = produtodRepository.buscaPorId(id)
+    fun salva(payment: Payment) = paymentRepository.save(payment)
+    fun buscaProdutoPorId(id: Long) = produtodRepository.getById(id)
 
 }

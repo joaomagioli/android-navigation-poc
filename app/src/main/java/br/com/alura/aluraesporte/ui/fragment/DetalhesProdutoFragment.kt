@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.alura.aluraesporte.R
-import br.com.alura.aluraesporte.extensions.formatParaMoedaBrasileira
+import br.com.alura.aluraesporte.extensions.formatToBrazilianCurrency
 import br.com.alura.aluraesporte.ui.viewmodel.DetalhesProdutoViewModel
 import kotlinx.android.synthetic.main.detalhes_produto.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -57,7 +57,7 @@ class DetalhesProdutoFragment : Fragment() {
         viewModel.produtoEncontrado.observe(this, Observer {
             it?.let { produto ->
                 detalhes_produto_nome.text = produto.name
-                detalhes_produto_preco.text = produto.price.formatParaMoedaBrasileira()
+                detalhes_produto_preco.text = produto.price.formatToBrazilianCurrency()
             }
         })
     }

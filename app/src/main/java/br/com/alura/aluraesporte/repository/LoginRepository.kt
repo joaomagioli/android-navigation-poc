@@ -3,7 +3,7 @@ package br.com.alura.aluraesporte.repository
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-private const val LOGGED_KEY = "CHAVE_LOGADO"
+private const val LOGGED_KEY = "LOGGED_KEY"
 
 class LoginRepository(private val preferences: SharedPreferences) {
 

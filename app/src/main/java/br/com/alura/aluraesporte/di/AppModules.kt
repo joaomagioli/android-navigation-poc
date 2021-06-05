@@ -27,15 +27,15 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.math.BigDecimal
 
-private const val NOME_BANCO_DE_DADOS = "aluraesporte.db"
-private const val NOME_BANCO_DE_DADOS_TESTE = "aluraesporte-test.db"
+private const val DATABASE_NAME = "aluraesporte.db"
+private const val DATA_BASE_TEST_NAME = "aluraesporte-test.db"
 
 val testeDatabaseModule = module {
     single<AppDatabase> {
         Room.databaseBuilder(
             get(),
             AppDatabase::class.java,
-            NOME_BANCO_DE_DADOS_TESTE
+            DATA_BASE_TEST_NAME
         ).fallbackToDestructiveMigration()
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
@@ -69,7 +69,7 @@ val databaseModule = module {
         Room.databaseBuilder(
             get(),
             AppDatabase::class.java,
-            NOME_BANCO_DE_DADOS
+            DATABASE_NAME
         ).build()
     }
 }

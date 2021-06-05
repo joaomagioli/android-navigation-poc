@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.alura.aluraesporte.R
-import br.com.alura.aluraesporte.extensions.formatParaMoedaBrasileira
+import br.com.alura.aluraesporte.extensions.formatToBrazilianCurrency
 import br.com.alura.aluraesporte.model.Payment
 import br.com.alura.aluraesporte.model.Product
 import br.com.alura.aluraesporte.ui.viewmodel.PagamentoViewModel
@@ -55,7 +55,7 @@ class PagamentoFragment : Fragment() {
             it?.let { produtoEncontrado ->
                 productEscolhido = produtoEncontrado
                 pagamento_preco.text = produtoEncontrado.price
-                    .formatParaMoedaBrasileira()
+                    .formatToBrazilianCurrency()
             }
         })
     }

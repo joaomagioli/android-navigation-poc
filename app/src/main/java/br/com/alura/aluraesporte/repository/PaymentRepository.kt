@@ -14,11 +14,11 @@ class PaymentRepository(private val dao: PaymentDAO) {
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
-    fun salva(payment: Payment): LiveData<Resource<Long>> {
+    fun save(payment: Payment): LiveData<Resource<Long>> {
         return MutableLiveData<Resource<Long>>().also { liveDate ->
             scope.launch {
-                val idPagamento = dao.save(payment)
-                liveDate.postValue(Resource(idPagamento))
+                val paymentId = dao.save(payment)
+                liveDate.postValue(Resource(paymentId))
             }
         }
     }
