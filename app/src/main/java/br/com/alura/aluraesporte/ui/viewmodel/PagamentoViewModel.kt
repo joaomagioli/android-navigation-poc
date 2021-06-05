@@ -1,15 +1,15 @@
 package br.com.alura.aluraesporte.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import br.com.alura.aluraesporte.model.Pagamento
-import br.com.alura.aluraesporte.repository.PagamentoRepository
-import br.com.alura.aluraesporte.repository.ProdutoRepository
+import br.com.alura.aluraesporte.model.Payment
+import br.com.alura.aluraesporte.repository.PaymentRepository
+import br.com.alura.aluraesporte.repository.ProductRepository
 
 class PagamentoViewModel(
-    private val pagamentoRepository: PagamentoRepository,
-    private val produtodRepository: ProdutoRepository) : ViewModel() {
+    private val paymentRepository: PaymentRepository,
+    private val produtodRepository: ProductRepository) : ViewModel() {
 
-    fun salva(pagamento: Pagamento) = pagamentoRepository.salva(pagamento)
+    fun salva(payment: Payment) = paymentRepository.salva(payment)
     fun buscaProdutoPorId(id: Long) = produtodRepository.buscaPorId(id)
 
 }

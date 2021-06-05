@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import br.com.alura.aluraesporte.R
 import br.com.alura.aluraesporte.extensions.formatParaMoedaBrasileira
-import br.com.alura.aluraesporte.model.Pagamento
-import br.com.alura.aluraesporte.model.Produto
+import br.com.alura.aluraesporte.model.Payment
+import br.com.alura.aluraesporte.model.Product
 import br.com.alura.aluraesporte.ui.viewmodel.PagamentoViewModel
 import kotlinx.android.synthetic.main.pagamento.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -27,7 +27,7 @@ class PagamentoFragment : Fragment() {
         navArgs.produtoId
     }
     private val viewModel: PagamentoViewModel by viewModel()
-    private lateinit var produtoEscolhido: Produto
+    private lateinit var productEscolhido: Product
     private val navController by lazy {
         findNavController()
     }
@@ -53,8 +53,8 @@ class PagamentoFragment : Fragment() {
     private fun buscaProduto() {
         viewModel.buscaProdutoPorId(produtoId).observe(this, Observer {
             it?.let { produtoEncontrado ->
-                produtoEscolhido = produtoEncontrado
-                pagamento_preco.text = produtoEncontrado.preco
+                productEscolhido = produtoEncontrado
+                pagamento_preco.text = produtoEncontrado.price
                     .formatParaMoedaBrasileira()
             }
         })
@@ -72,9 +72,9 @@ class PagamentoFragment : Fragment() {
         }
     }
 
-    private fun salva(pagamento: Pagamento) {
-        if (::produtoEscolhido.isInitialized) {
-            viewModel.salva(pagamento)
+    private fun salva(payment: Payment) {
+        if (::productEscolhido.isInitialized) {
+            viewModel.salva(payment)
                 .observe(this, Observer {
                     it?.dado?.let {
                         Toast.makeText(context,
@@ -86,7 +86,7 @@ class PagamentoFragment : Fragment() {
         }
     }
 
-    private fun criaPagamento(): Pagamento? {
+    private fun criaPagamento(): Payment? {
         val numeroCartao = pagamento_numero_cartao
             .editText?.text.toString()
         val dataValidade = pagamento_data_validade
@@ -100,13 +100,13 @@ class PagamentoFragment : Fragment() {
         numeroCartao: String,
         dataValidade: String,
         cvc: String
-    ): Pagamento? = try {
-        Pagamento(
-            numeroCartao = numeroCartao.toInt(),
-            dataValidade = dataValidade,
+    ): Payment? = try {
+        Payment(
+            cardNumber = numeroCartao.toInt(),
+            expirationDate = dataValidade,
             cvc = cvc.toInt(),
-            produtoId = produtoId,
-            preco = produtoEscolhido.preco
+            productId = produtoId,
+            price = productEscolhido.price
         )
     } catch (e: NumberFormatException) {
         null
