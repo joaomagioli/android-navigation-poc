@@ -16,17 +16,17 @@ import br.com.alura.aluraesporte.ui.viewmodel.PagamentoViewModel
 import kotlinx.android.synthetic.main.pagamento.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-private const val FALHA_AO_CRIAR_PAGAMENTO = "Falha ao criar pagamento"
-private const val COMPRA_REALIZADA_SUCESSO = "Compra realizada com sucesso"
+private const val FAILED_TO_CREATE_PAYMENT = "Failed to create payment"
+private const val SUCCESSFUL_PURCHASE = "Successful purchase"
 
 class PagamentoFragment : BaseFragment() {
 
     private val navArgs by navArgs<PagamentoFragmentArgs>()
-    private val produtoId by lazy {
+    private val productId by lazy {
         navArgs.produtoId
     }
     private val viewModel: PagamentoViewModel by viewModel()
-    private lateinit var productEscolhido: Product
+    private lateinit var chosenProduct: Product
     private val navController by lazy {
         findNavController()
     }
@@ -45,25 +45,25 @@ class PagamentoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configuraBotaoConfirmaPagamento()
-        buscaProduto()
+        setConfirmPaymentButton()
+        getProduct()
     }
 
-    private fun buscaProduto() {
-        viewModel.getProductById(produtoId).observe(this, Observer {
-            it?.let { produtoEncontrado ->
-                productEscolhido = produtoEncontrado
-                pagamento_preco.text = produtoEncontrado.price
+    private fun getProduct() {
+        viewModel.getProductById(productId).observe(this, Observer {
+            it?.let { foundProduct ->
+                chosenProduct = foundProduct
+                pagamento_preco.text = foundProduct.price
                     .formatToBrazilianCurrency()
             }
         })
     }
 
-    private fun configuraBotaoConfirmaPagamento() {
+    private fun setConfirmPaymentButton() {
         pagamento_botao_confirma_pagamento.setOnClickListener {
-            criaPagamento()?.let(this::salva) ?: Toast.makeText(
+            createPayment()?.let(this::save) ?: Toast.makeText(
                 context,
-                FALHA_AO_CRIAR_PAGAMENTO,
+                FAILED_TO_CREATE_PAYMENT,
                 Toast.LENGTH_LONG
             ).show()
             val directions = PagamentoFragmentDirections.actionPagamentoToListaProdutos()
@@ -71,13 +71,13 @@ class PagamentoFragment : BaseFragment() {
         }
     }
 
-    private fun salva(payment: Payment) {
-        if (::productEscolhido.isInitialized) {
+    private fun save(payment: Payment) {
+        if (::chosenProduct.isInitialized) {
             viewModel.save(payment)
                 .observe(this, Observer {
                     it?.dado?.let {
                         Toast.makeText(context,
-                            COMPRA_REALIZADA_SUCESSO,
+                            SUCCESSFUL_PURCHASE,
                             Toast.LENGTH_LONG)
                             .show()
                     }
@@ -85,27 +85,27 @@ class PagamentoFragment : BaseFragment() {
         }
     }
 
-    private fun criaPagamento(): Payment? {
-        val numeroCartao = pagamento_numero_cartao
+    private fun createPayment(): Payment? {
+        val cardNumber = pagamento_numero_cartao
             .editText?.text.toString()
-        val dataValidade = pagamento_data_validade
+        val expirationDate = pagamento_data_validade
             .editText?.text.toString()
         val cvc = pagamento_cvc
             .editText?.text.toString()
-        return geraPagamento(numeroCartao, dataValidade, cvc)
+        return generatePayment(cardNumber, expirationDate, cvc)
     }
 
-    private fun geraPagamento(
-        numeroCartao: String,
-        dataValidade: String,
+    private fun generatePayment(
+        cardNumber: String,
+        expirationDate: String,
         cvc: String
     ): Payment? = try {
         Payment(
-            cardNumber = numeroCartao.toInt(),
-            expirationDate = dataValidade,
+            cardNumber = cardNumber.toInt(),
+            expirationDate = expirationDate,
             cvc = cvc.toInt(),
-            productId = produtoId,
-            price = productEscolhido.price
+            productId = productId,
+            price = chosenProduct.price
         )
     } catch (e: NumberFormatException) {
         null
