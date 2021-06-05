@@ -34,7 +34,7 @@
             android:id="@+id/action_pagamento_to_listaProdutos"
             app:destination="@id/listaProdutos"
             app:launchSingleTop="false"
-            app:popUpTo="@id/nav_graph"
+            app:popUpTo="@id/listaProdutos"
             app:popUpToInclusive="true" />
         <argument
             android:name="produtoId"
@@ -47,6 +47,8 @@
         tools:layout="@layout/login">
         <action
             android:id="@+id/action_login_to_listaProdutos"
-            app:destination="@id/listaProdutos" />
+            app:destination="@id/listaProdutos"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
