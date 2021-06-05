@@ -46,7 +46,7 @@ class DetalhesProdutoFragment : Fragment() {
 
     private fun configuraBotaoComprar() {
         detalhes_produto_botao_comprar.setOnClickListener {
-            viewModel.produtoEncontrado.value?.let {
+            viewModel.foundProduct.value?.let {
                 val directions = DetalhesProdutoFragmentDirections.actionDetalhesProdutoToPagamento(produtoId)
                 navController.navigate(directions)
             }
@@ -54,7 +54,7 @@ class DetalhesProdutoFragment : Fragment() {
     }
 
     private fun buscaProduto() {
-        viewModel.produtoEncontrado.observe(this, Observer {
+        viewModel.foundProduct.observe(this, Observer {
             it?.let { produto ->
                 detalhes_produto_nome.text = produto.name
                 detalhes_produto_preco.text = produto.price.formatToBrazilianCurrency()

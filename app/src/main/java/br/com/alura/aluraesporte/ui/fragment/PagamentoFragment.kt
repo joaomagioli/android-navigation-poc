@@ -51,7 +51,7 @@ class PagamentoFragment : Fragment() {
     }
 
     private fun buscaProduto() {
-        viewModel.buscaProdutoPorId(produtoId).observe(this, Observer {
+        viewModel.getProductById(produtoId).observe(this, Observer {
             it?.let { produtoEncontrado ->
                 productEscolhido = produtoEncontrado
                 pagamento_preco.text = produtoEncontrado.price
@@ -74,7 +74,7 @@ class PagamentoFragment : Fragment() {
 
     private fun salva(payment: Payment) {
         if (::productEscolhido.isInitialized) {
-            viewModel.salva(payment)
+            viewModel.save(payment)
                 .observe(this, Observer {
                     it?.dado?.let {
                         Toast.makeText(context,

@@ -7,9 +7,9 @@ import br.com.alura.aluraesporte.repository.ProductRepository
 
 class PagamentoViewModel(
     private val paymentRepository: PaymentRepository,
-    private val produtodRepository: ProductRepository) : ViewModel() {
+    private val productRepository: ProductRepository) : ViewModel() {
 
-    fun salva(payment: Payment) = paymentRepository.save(payment)
-    fun buscaProdutoPorId(id: Long) = produtodRepository.getById(id)
+    fun save(payment: Payment) = paymentRepository.save(payment)
+    fun getProductById(id: Long) = productRepository.getById(id)
 
 }

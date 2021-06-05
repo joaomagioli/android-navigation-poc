@@ -13,5 +13,11 @@ class LoginRepository(private val preferences: SharedPreferences) {
         }
     }
 
+    fun logoff() {
+        preferences.edit {
+            putBoolean(LOGGED_KEY, false)
+        }
+    }
+
     fun isLogged(): Boolean = preferences.getBoolean(LOGGED_KEY, false)
 }

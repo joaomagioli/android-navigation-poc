@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import br.com.alura.aluraesporte.repository.ProductRepository
 
 class DetalhesProdutoViewModel(
-    produtoId: Long,
-    repository: ProductRepository
+    productId: Long,
+    productRepository: ProductRepository
 ) : ViewModel() {
 
-    val produtoEncontrado = repository.getById(produtoId)
+    val foundProduct = productRepository.getById(productId)
 
 }

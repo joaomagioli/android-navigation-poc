@@ -7,5 +7,7 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     fun login() = loginRepository.login()
 
+    fun logoff() = loginRepository.logoff()
+
     fun isLogged(): Boolean = loginRepository.isLogged()
 }
