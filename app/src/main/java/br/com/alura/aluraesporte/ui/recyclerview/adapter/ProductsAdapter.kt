@@ -10,31 +10,31 @@ import br.com.alura.aluraesporte.extensions.formatToBrazilianCurrency
 import br.com.alura.aluraesporte.model.Product
 import kotlinx.android.synthetic.main.item_produto.view.*
 
-class ProdutosAdapter(
+class ProductsAdapter(
     private val context: Context,
     private val products: MutableList<Product> = mutableListOf(),
     var onItemClickListener: (product: Product) -> Unit = {}
-) : RecyclerView.Adapter<ProdutosAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewCriada = LayoutInflater.from(context).inflate(
+        val view = LayoutInflater.from(context).inflate(
             R.layout.item_produto,
             parent,
             false
         )
-        return ViewHolder(viewCriada)
+        return ViewHolder(view)
     }
 
     override fun getItemCount() = products.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.vincula(products[position])
+        holder.bind(products[position])
     }
 
-    fun atualiza(produtosNovos: List<Product>) {
+    fun update(newProducts: List<Product>) {
         notifyItemRangeRemoved(0, products.size)
         products.clear()
-        products.addAll(produtosNovos)
+        products.addAll(newProducts)
         notifyItemRangeInserted(0, products.size)
     }
 
@@ -42,8 +42,8 @@ class ProdutosAdapter(
         RecyclerView.ViewHolder(itemView) {
 
         private lateinit var product: Product
-        private val campoNome by lazy { itemView.item_produto_nome }
-        private val campoPreco by lazy { itemView.item_produto_preco }
+        private val name by lazy { itemView.item_produto_nome }
+        private val price by lazy { itemView.item_produto_preco }
 
         init {
             itemView.setOnClickListener {
@@ -53,10 +53,10 @@ class ProdutosAdapter(
             }
         }
 
-        fun vincula(product: Product) {
+        fun bind(product: Product) {
             this.product = product
-            campoNome.text = product.name
-            campoPreco.text = product.price.formatToBrazilianCurrency()
+            name.text = product.name
+            price.text = product.price.formatToBrazilianCurrency()
         }
 
     }

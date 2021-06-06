@@ -6,7 +6,7 @@
     app:startDestination="@id/listaProdutos">
     <fragment
         android:id="@+id/listaProdutos"
-        android:name="br.com.alura.aluraesporte.ui.fragment.ListaProdutosFragment"
+        android:name="br.com.alura.aluraesporte.ui.fragment.ListProductsFragment"
         android:label="Lista de Produtos"
         tools:layout="@layout/lista_produtos">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/detalhesProduto"
-        android:name="br.com.alura.aluraesporte.ui.fragment.DetalhesProdutoFragment"
+        android:name="br.com.alura.aluraesporte.ui.fragment.DetailsProductFragment"
         android:label="Detalhes do Produto"
         tools:layout="@layout/detalhes_produto">
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/pagamento"
-        android:name="br.com.alura.aluraesporte.ui.fragment.PagamentoFragment"
+        android:name="br.com.alura.aluraesporte.ui.fragment.PaymentFragment"
         android:label="Pagamento"
         tools:layout="@layout/pagamento">
         <action

@@ -14,13 +14,13 @@ import kotlinx.android.synthetic.main.detalhes_produto.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetalhesProdutoFragment : BaseFragment() {
+class DetailsProductFragment : BaseFragment() {
 
     private val navArgs by navArgs<DetalhesProdutoFragmentArgs>()
-    private val produtoId by lazy {
+    private val productId by lazy {
         navArgs.produtoId
     }
-    private val viewModel: DetalhesProdutoViewModel by viewModel { parametersOf(produtoId) }
+    private val viewModel: DetalhesProdutoViewModel by viewModel { parametersOf(productId) }
     private val navController by lazy {
         findNavController()
     }
@@ -39,24 +39,24 @@ class DetalhesProdutoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        buscaProduto()
-        configuraBotaoComprar()
+        getProduct()
+        setBuyButton()
     }
 
-    private fun configuraBotaoComprar() {
+    private fun setBuyButton() {
         detalhes_produto_botao_comprar.setOnClickListener {
             viewModel.foundProduct.value?.let {
-                val directions = DetalhesProdutoFragmentDirections.actionDetalhesProdutoToPagamento(produtoId)
+                val directions = DetalhesProdutoFragmentDirections.actionDetalhesProdutoToPagamento(productId)
                 navController.navigate(directions)
             }
         }
     }
 
-    private fun buscaProduto() {
+    private fun getProduct() {
         viewModel.foundProduct.observe(this, Observer {
-            it?.let { produto ->
-                detalhes_produto_nome.text = produto.name
-                detalhes_produto_preco.text = produto.price.formatToBrazilianCurrency()
+            it?.let { product ->
+                detalhes_produto_nome.text = product.name
+                detalhes_produto_preco.text = product.price.formatToBrazilianCurrency()
             }
         })
     }

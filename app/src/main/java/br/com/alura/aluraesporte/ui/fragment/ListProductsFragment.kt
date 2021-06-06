@@ -3,22 +3,20 @@ package br.com.alura.aluraesporte.ui.fragment
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout.VERTICAL
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.alura.aluraesporte.R
-import br.com.alura.aluraesporte.ui.recyclerview.adapter.ProdutosAdapter
-import br.com.alura.aluraesporte.ui.viewmodel.LoginViewModel
+import br.com.alura.aluraesporte.ui.recyclerview.adapter.ProductsAdapter
 import br.com.alura.aluraesporte.ui.viewmodel.ProdutosViewModel
 import kotlinx.android.synthetic.main.lista_produtos.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ListaProdutosFragment : BaseFragment() {
+class ListProductsFragment : BaseFragment() {
 
     private val viewModel: ProdutosViewModel by viewModel()
-    private val adapter: ProdutosAdapter by inject()
+    private val adapter: ProductsAdapter by inject()
     private val navController by lazy {
         findNavController()
     }
@@ -57,7 +55,7 @@ class ListaProdutosFragment : BaseFragment() {
     private fun getAllProducts() {
         viewModel.getAllProducts().observe(this, Observer { foundProducts ->
             foundProducts?.let {
-                adapter.atualiza(it)
+                adapter.update(it)
             }
         })
     }

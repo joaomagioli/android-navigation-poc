@@ -12,10 +12,10 @@ import br.com.alura.aluraesporte.model.Product
 import br.com.alura.aluraesporte.repository.LoginRepository
 import br.com.alura.aluraesporte.repository.PaymentRepository
 import br.com.alura.aluraesporte.repository.ProductRepository
-import br.com.alura.aluraesporte.ui.fragment.DetalhesProdutoFragment
-import br.com.alura.aluraesporte.ui.fragment.ListaProdutosFragment
-import br.com.alura.aluraesporte.ui.fragment.PagamentoFragment
-import br.com.alura.aluraesporte.ui.recyclerview.adapter.ProdutosAdapter
+import br.com.alura.aluraesporte.ui.fragment.DetailsProductFragment
+import br.com.alura.aluraesporte.ui.fragment.ListProductsFragment
+import br.com.alura.aluraesporte.ui.fragment.PaymentFragment
+import br.com.alura.aluraesporte.ui.recyclerview.adapter.ProductsAdapter
 import br.com.alura.aluraesporte.ui.viewmodel.DetalhesProdutoViewModel
 import br.com.alura.aluraesporte.ui.viewmodel.LoginViewModel
 import br.com.alura.aluraesporte.ui.viewmodel.PagamentoViewModel
@@ -84,10 +84,10 @@ val daoModule = module {
 }
 
 val uiModule = module {
-    factory<DetalhesProdutoFragment> { DetalhesProdutoFragment() }
-    factory<ListaProdutosFragment> { ListaProdutosFragment() }
-    factory<PagamentoFragment> { PagamentoFragment() }
-    factory<ProdutosAdapter> { ProdutosAdapter(get()) }
+    factory<DetailsProductFragment> { DetailsProductFragment() }
+    factory<ListProductsFragment> { ListProductsFragment() }
+    factory<PaymentFragment> { PaymentFragment() }
+    factory<ProductsAdapter> { ProductsAdapter(get()) }
 }
 
 val viewModelModule = module {
